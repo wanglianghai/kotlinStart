@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.bignerdranch.android.weather.R
+import com.bignerdranch.android.weather.domain.Forecast
 import com.bignerdranch.android.weather.domain.RequestForecastCommand
 import org.jetbrains.anko.async
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    private val items = listOf("Mon 6/23 - Sunny - 31/17",
+    private val items = listOf<String>("Mon 6/23 - Sunny - 31/17",
             "Tue 6/24 - Foggy - 21/8",
             "Wed 6/25 - Cloudy - 22/17",
             "Thurs 6/26 - Rainy - 18/11",
@@ -31,7 +34,12 @@ class MainActivity : AppCompatActivity() {
         async {
             val result = RequestForecastCommand("94043").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result,
+                        object : OnItemClickListener{
+                            override fun invoke(forecast: Forecast) {
+                                toast(forecast.date)
+                            }
+                        })
             }
         }
     }
