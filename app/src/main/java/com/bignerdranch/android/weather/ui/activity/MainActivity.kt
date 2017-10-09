@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import com.bignerdranch.android.weather.R
 import com.bignerdranch.android.weather.domain.Forecast
 import com.bignerdranch.android.weather.domain.RequestForecastCommand
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val forecastList = findViewById(R.id.forecast_list) as RecyclerView
         forecastList.layoutManager = LinearLayoutManager(this)
 //        forecastList.adapter = ForecastListAdapter(items)
 
